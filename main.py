@@ -1,7 +1,7 @@
 import pygame, mySprites
 import asyncio
 import random
-# cookie clicker (test)
+# cookie clicker
 pygame.init()
 
 def main():
