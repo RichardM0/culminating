@@ -46,7 +46,15 @@ def main():
     Upg2CookieReq = 250
     Upg2Price = mySprites.Label(str(Upg2CookieReq), "Arial", (540, 110), 18, (0,0,0))
 
-    allSprites = pygame.sprite.OrderedUpdates(cookie, Upg2, Upg2Count, Upg2Price, CpsLabel, Upg1, Upg1Count, Upg1Price, CookiesLabel, numCookiesLabel)
+    # Upgrade 3 Information (Milk Stand)
+    Upg3Num = 0
+    Upg3Boost = 2502
+    Upg3 = mySprites.Label("Milk Stand", "Arial", (540, 140), 20, (0,0,0))
+    Upg3Count = mySprites.Label(str(Upg3Num), "Arial", (450, 150), 18, (0,0,0))
+    Upg3CookieReq = 2500
+    Upg3Price = mySprites.Label(str(Upg3CookieReq), "Arial", (540, 160), 18, (0,0,0))
+
+    allSprites = pygame.sprite.OrderedUpdates(cookie, Upg3, Upg3Count, Upg3Price, Upg2, Upg2Count, Upg2Price, CpsLabel, Upg1, Upg1Count, Upg1Price, CookiesLabel, numCookiesLabel)
  
 
     # Loop
@@ -72,6 +80,13 @@ def main():
                     AutoCookies += 10
                     Upg2Boost += random.choice([26,27,28,29,30,31])
                     Upg2Num += 1
+                if (Upg3.rect.collidepoint(pygame.mouse.get_pos()) or Upg3Price.rect.collidepoint(pygame.mouse.get_pos())) and Cookies >= Upg3CookieReq:
+                    Cookies -= Upg3CookieReq
+                    Upg3CookieReq += Upg3Boost
+                    AutoCookies += 50
+                    Upg2Boost += random.choice([100,101,102,103,104])
+                    Upg3Num += 1
+
 
         numCookiesLabel.setText(str(Cookies))
         CpsLabel.setText("Cookies per Second: " + str(AutoCookies))
@@ -82,6 +97,8 @@ def main():
         Upg2Price.setText(str(Upg2CookieReq))
         Upg2Count.setText(str(Upg2Num))
         # Upgrade 3 Label Update
+        Upg3Price.setText(str(Upg3CookieReq))
+        Upg3Count.setText(str(Upg3Num))
     
         pygame.display.flip()
         screen.blit(background, (0, 0))
